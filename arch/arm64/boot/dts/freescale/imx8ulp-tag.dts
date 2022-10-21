@@ -9,6 +9,21 @@
 #include <dt-bindings/input/linux-event-codes.h>
 #include <dt-bindings/input/ti-drv260x.h>
 
+&iomuxc0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl0_hog>;
+
+	pinctrl0_hog: hoggrp0 {
+		fsl,pins = <
+			MX8ULP_PAD_PTC0__PTC0	0x03
+			MX8ULP_PAD_PTC1__PTC1	0x03
+			MX8ULP_PAD_PTC2__PTC2	0x03
+			MX8ULP_PAD_PTC3__PTC3	0x03
+			MX8ULP_PAD_PTC4__PTC4	0x03
+		>;
+	};
+};
+
 &iomuxc1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
@@ -281,6 +296,21 @@
 		};
 	};
 
+	lpspi2 {
+		compatible = "spi-gpio";
+		gpio-sck = <&gpioc 4 GPIO_ACTIVE_HIGH>;
+		gpio-mosi = <&gpioc 2 GPIO_ACTIVE_HIGH>;
+		cs-gpios = <&gpioc 1 GPIO_ACTIVE_LOW>;
+		num-chipselects = <1>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		spidev: spidev-gpio@0 {
+			compatible = "spidev";
+			reg = <0>;
+			spi-max-frequency = <1000000>;
+		};
+	};
 };
 
 &crypto {
