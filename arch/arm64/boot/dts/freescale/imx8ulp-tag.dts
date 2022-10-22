@@ -20,6 +20,7 @@
 			MX8ULP_PAD_PTC2__PTC2	0x03
 			MX8ULP_PAD_PTC3__PTC3	0x03
 			MX8ULP_PAD_PTC4__PTC4	0x03
+			MX8ULP_PAD_PTC5__PTC5   0x00	/* fake MISO */
 		>;
 	};
 };
@@ -298,9 +299,10 @@
 
 	lpspi2 {
 		compatible = "spi-gpio";
-		gpio-sck = <&gpioc 4 GPIO_ACTIVE_HIGH>;
-		gpio-mosi = <&gpioc 2 GPIO_ACTIVE_HIGH>;
-		cs-gpios = <&gpioc 1 GPIO_ACTIVE_LOW>;
+		sck-gpios = <&gpioc 4 0>;
+		mosi-gpios = <&gpioc 2 0>;
+		miso-gpios = <&gpioc 5 0>;
+		cs-gpios = <&gpioc 1 0>;
 		num-chipselects = <1>;
 		#address-cells = <1>;
 		#size-cells = <0>;
