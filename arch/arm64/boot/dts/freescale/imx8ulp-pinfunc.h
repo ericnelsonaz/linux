@@ -10,6 +10,33 @@
  * The pin function ID is a tuple of
  * <mux_reg input_reg mux_mode input_val>
  */
+/* iomuxc0 */
+#define MX8ULP_PAD_PTC0__PTC0                                        0x0100 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC1__PTC1                                        0x0104 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC2__PTC2                                        0x0108 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC3__PTC3                                        0x010C 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC4__PTC4                                        0x0110 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC5__PTC5                                        0x0114 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC6__PTC6                                        0x0118 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC7__PTC7                                        0x011C 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC8__PTC8                                        0x0120 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC9__PTC9                                        0x0124 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC10__PTC10                                      0x0128 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC11__PTC11                                      0x012C 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC12__PTC12                                      0x0130 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC13__PTC13                                      0x0134 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC14__PTC14                                      0x0138 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC15__PTC15                                      0x013C 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC16__PTC16                                      0x0140 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC17__PTC17                                      0x0144 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC18__PTC18                                      0x0148 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC19__PTC19                                      0x014C 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC20__PTC20                                      0x0150 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC21__PTC21                                      0x0154 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC22__PTC22                                      0x0158 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTC23__PTC23                                      0x015C 0x0000 0x1 0x0
+
+/* iomuxc1 */
 #define MX8ULP_PAD_PTD0__PTD0                                        0x0000 0x0000 0x1 0x0
 #define MX8ULP_PAD_PTD0__I2S6_RX_BCLK                                0x0000 0x0B44 0x7 0x1
 #define MX8ULP_PAD_PTD0__SDHC0_RESET_B                               0x0000 0x0000 0x8 0x0
