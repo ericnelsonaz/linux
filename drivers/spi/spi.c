@@ -855,7 +855,7 @@ static void spi_set_cs(struct spi_device *spi, bool enable, bool force)
 							enable1);
 					} else {
 						gpiod_set_value_cansleep(
-							spi->cs_gpiod, enable1);
+							spi->cs_gpiod, !enable1);
 					}
 				}
 			} else {
