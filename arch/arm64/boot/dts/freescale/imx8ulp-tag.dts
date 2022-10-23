@@ -330,6 +330,11 @@
 			gpios = <&gpioe 7 GPIO_ACTIVE_LOW>;
 		};
 
+		led-auxenable {
+			gpios = <&gpioc 3 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
 		led-btnbacklight {
 			gpios = <&gpiof 4 GPIO_ACTIVE_LOW>;
 		};
