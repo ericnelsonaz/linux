@@ -20,6 +20,8 @@
 
 	aliases {
 		ethernet0 = &fec;
+		gpio1 = &gpioa;
+		gpio2 = &gpiob;
 		gpio3 = &gpioc;
 		gpio4 = &gpiod;
 		gpio5 = &gpioe;
@@ -1353,6 +1355,28 @@
 					};
 				};
 			};
+		};
+
+		gpioa: gpio@28800000 {
+			compatible = "fsl,imx8ulp-gpio", "fsl,imx7ulp-gpio";
+			reg = <0x28800080 0x1000>, <0x28800040 0x40>;
+			gpio-controller;
+			#gpio-cells = <2>;
+			interrupts = <GIC_SPI 121 IRQ_TYPE_LEVEL_HIGH>;
+			interrupt-controller;
+			#interrupt-cells = <2>;
+			gpio-ranges = <&iomuxc0 0 0 32>;
+		};
+
+		gpiob: gpio@28810000 {
+			compatible = "fsl,imx8ulp-gpio", "fsl,imx7ulp-gpio";
+			reg = <0x28810080 0x1000>, <0x28810040 0x40>;
+			gpio-controller;
+			#gpio-cells = <2>;
+			interrupts = <GIC_SPI 123 IRQ_TYPE_LEVEL_HIGH>;
+			interrupt-controller;
+			#interrupt-cells = <2>;
+			gpio-ranges = <&iomuxc0 0 32 32>;
 		};
 
 		gpioc: gpio@28820000 {
