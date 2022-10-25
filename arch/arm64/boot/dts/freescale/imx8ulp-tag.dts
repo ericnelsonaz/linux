@@ -247,13 +247,11 @@
 		pinctrl-0 = <&pinctrl_gpio_keys0>,
 			    <&pinctrl_gpio_keys1>;
 
-#if 0
 		aux-left {
 			label = "aux left";
 			gpios = <&gpiob 7 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_BRIGHTNESS_TOGGLE>;
 		};
-#endif
 
 		aux-right {
 			label = "aux right";
@@ -273,13 +271,12 @@
 			linux,code = <KEY_UP>;
 		};
 
-#if 0
 		nav-left {
 			label = "nav left";
 			gpios = <&gpioa 16 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_LEFT>;
 		};
-#endif
+
 		nav-right {
 			label = "nav right";
 			gpios = <&gpioe 18 GPIO_ACTIVE_LOW>;
