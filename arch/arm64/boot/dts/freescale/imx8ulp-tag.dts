@@ -15,7 +15,6 @@
 
 	pinctrl0_hog: hoggrp0 {
 		fsl,pins = <
-			MX8ULP_PAD_PTC0__PTC0	0x03
 			MX8ULP_PAD_PTC1__PTC1	0x03
 			MX8ULP_PAD_PTC2__PTC2	0x03
 			MX8ULP_PAD_PTC3__PTC3	0x03
@@ -23,6 +22,15 @@
 			MX8ULP_PAD_PTC5__PTC5   0x00	/* fake MISO */
 		>;
 	};
+
+	pinctrl_gpio_keys0: auxkeysgrp {
+		fsl,pins = <
+			MX8ULP_PAD_PTA16__PTA16 0x03    /* NAV LEFT */
+			MX8ULP_PAD_PTC0__PTC0	0x03	/* LPD_RGHT-BTNn */
+			MX8ULP_PAD_PTB7__PTB7	0x03	/* LPD_LEFT-BTNn */
+			MX8ULP_PAD_PTC17__PTC17 0x03    /* NAV MENU */
+		>;
+        };
 };
 
 &iomuxc1 {
@@ -49,9 +57,20 @@
 		>;
 	};
 
+        pinctrl_gpio_keys1: auxkeysgrp {
+		fsl,pins = <
+			MX8ULP_PAD_PTE17__PTE17 0x03    /* NAV UP */
+			MX8ULP_PAD_PTE18__PTE18 0x03    /* NAV RIGHT */
+			MX8ULP_PAD_PTE19__PTE19 0x03    /* NAV DOWN */
+			MX8ULP_PAD_PTE16__PTE16 0x03    /* NAV SELECT */
+			MX8ULP_PAD_PTE2__PTE2   0x03    /* NAV BACK */
+		>;
+        };
+
 	pinctrl_gpio_leds: ledgrp {
 		fsl,pins = <
-			MX8ULP_PAD_PTE7__PTE7	0x03	/* aux-backlight */
+			MX8ULP_PAD_PTD18__PTD18	0x03	/* 39: aux-backlight */
+			MX8ULP_PAD_PTE10__PTE10	0x102	/* 55 - GPS receiver */
 			MX8ULP_PAD_PTF4__PTF4	0x03	/* btn-backlight */
 		>;
 	};
@@ -61,22 +80,16 @@
 			MX8ULP_PAD_PTD15__PTD15		0x7	/* IMU_IRQ */
 			MX8ULP_PAD_PTD16__PTD16		0x7	/* 29 */
 			MX8ULP_PAD_PTD17__PTD17		0x7	/* 30 */
-			MX8ULP_PAD_PTD18__PTD18		0x7	/* 39 */
 			MX8ULP_PAD_PTD19__PTD19		0x7	/* 26 */
 			MX8ULP_PAD_PTD20__PTD20		0x7	/* 33 */
 			MX8ULP_PAD_PTE0__PTE0		0x7	/* 64 */
 			MX8ULP_PAD_PTE1__PTE1		0x7	/* TUSB_IRQ */
-			MX8ULP_PAD_PTE2__PTE2		0x7	/* BACK */
 			MX8ULP_PAD_PTE3__PTE3		0x7	/* 19 */
 			MX8ULP_PAD_PTE6__PTE6		0x7	/* 34 */
+			MX8ULP_PAD_PTE7__PTE7		0x7     /* 32 */
 			MX8ULP_PAD_PTE8__PTE8		0x7	/* 20 */
 			MX8ULP_PAD_PTE9__PTE9		0x7	/* 31 */
-			MX8ULP_PAD_PTE10__PTE10		0x7	/* 55 */
 			MX8ULP_PAD_PTE14__PTE14		0x7	/* 41 */
-			MX8ULP_PAD_PTE16__PTE16		0x7	/* Start */
-			MX8ULP_PAD_PTE17__PTE17		0x7	/* Up */
-			MX8ULP_PAD_PTE18__PTE18		0x7	/* Right */
-			MX8ULP_PAD_PTE19__PTE19		0x7	/* Down */
 			MX8ULP_PAD_PTF15__TPM4_CH3	0x7	/* pwm4 */
 			MX8ULP_PAD_PTF18__PTF18		0x7	/* 54 */
 			MX8ULP_PAD_PTF19__PTF19		0x7	/* 47 */
@@ -228,6 +241,70 @@
 		bootargs = "console=ttyLP3,115200 earlycon";
 	};
 
+	gpio-keys {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_gpio_keys0>,
+			    <&pinctrl_gpio_keys1>;
+
+#if 0
+		aux-left {
+			label = "aux left";
+			gpios = <&gpiob 7 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_BRIGHTNESS_TOGGLE>;
+		};
+#endif
+
+		aux-right {
+			label = "aux right";
+			gpios = <&gpioc 0 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_SCROLLDOWN>;
+		};
+
+		nav-menu {
+			label = "nav menu";
+			gpios = <&gpioc 17 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_MENU>;
+		};
+
+		nav-up {
+			label = "nav up";
+			gpios = <&gpioe 17 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_UP>;
+		};
+
+#if 0
+		nav-left {
+			label = "nav left";
+			gpios = <&gpioa 16 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_LEFT>;
+		};
+#endif
+		nav-right {
+			label = "nav right";
+			gpios = <&gpioe 18 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RIGHT>;
+		};
+
+		nav-down {
+			label = "nav down";
+			gpios = <&gpioe 19 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_DOWN>;
+		};
+
+		nav-select {
+			label = "nav select";
+			gpios = <&gpioe 16 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_ENTER>;
+		};
+
+		nav-back {
+			label = "nav back";
+			gpios = <&gpioe 2 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_BACK>;
+		};
+	};
+
 	memory@40000000 {
 		device_type = "memory";
 		reg = <0x0 0x80000000 0 0x80000000>;
@@ -327,7 +404,7 @@
 		pinctrl-0 = <&pinctrl_gpio_leds>;
 
 		led-auxbacklight {
-			gpios = <&gpioe 7 GPIO_ACTIVE_LOW>;
+			gpios = <&gpiod 18 GPIO_ACTIVE_LOW>;
 		};
 
 		led-auxenable {
@@ -337,6 +414,11 @@
 
 		led-btnbacklight {
 			gpios = <&gpiof 4 GPIO_ACTIVE_LOW>;
+		};
+
+                led-gpsreceiver {
+			gpios = <&gpioe 10 GPIO_ACTIVE_LOW>;
+                        default-state = "on";
 		};
 	};
 };
