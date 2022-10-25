@@ -11,6 +11,8 @@
  * <mux_reg input_reg mux_mode input_val>
  */
 /* iomuxc0 */
+#define MX8ULP_PAD_PTA16__PTA16                                      0x0040 0x0000 0x1 0x0
+#define MX8ULP_PAD_PTB7__PTB7                                        0x009C 0x0000 0x1 0x0
 #define MX8ULP_PAD_PTC0__PTC0                                        0x0100 0x0000 0x1 0x0
 #define MX8ULP_PAD_PTC1__PTC1                                        0x0104 0x0000 0x1 0x0
 #define MX8ULP_PAD_PTC2__PTC2                                        0x0108 0x0000 0x1 0x0
