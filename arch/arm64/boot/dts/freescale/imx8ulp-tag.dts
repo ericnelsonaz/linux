@@ -17,7 +17,6 @@
 		fsl,pins = <
 			MX8ULP_PAD_PTC1__PTC1	0x03
 			MX8ULP_PAD_PTC2__PTC2	0x03
-			MX8ULP_PAD_PTC3__PTC3	0x03
 			MX8ULP_PAD_PTC4__PTC4	0x03
 			MX8ULP_PAD_PTC5__PTC5   0x00	/* fake MISO */
 		>;
@@ -31,6 +30,13 @@
 			MX8ULP_PAD_PTC17__PTC17 0x03    /* NAV MENU */
 		>;
         };
+
+	pinctrl_gpio_leds0: leds0grp {
+		fsl,pins = <
+			MX8ULP_PAD_PTC3__PTC3	0x03	/* led-auxenable */
+			MX8ULP_PAD_PTC11__PTC11	0x07	/* MAIN_BKLGT_ENn */
+		>;
+	};
 };
 
 &iomuxc1 {
@@ -72,6 +78,9 @@
 			MX8ULP_PAD_PTD18__PTD18	0x03	/* 39: aux-backlight */
 			MX8ULP_PAD_PTE10__PTE10	0x102	/* 55 - GPS receiver */
 			MX8ULP_PAD_PTF4__PTF4	0x03	/* btn-backlight */
+			MX8ULP_PAD_PTE9__PTE9	0x07	/* MAIN-BKLT-DIS-n */
+			MX8ULP_PAD_PTE7__PTE7	0x07	/* SOM-LCM_RSTn */
+			MX8ULP_PAD_PTD19__PTD19	0x07	/* LCD-TE0-VS */
 		>;
 	};
 
@@ -80,15 +89,12 @@
 			MX8ULP_PAD_PTD15__PTD15		0x7	/* IMU_IRQ */
 			MX8ULP_PAD_PTD16__PTD16		0x7	/* 29 */
 			MX8ULP_PAD_PTD17__PTD17		0x7	/* 30 */
-			MX8ULP_PAD_PTD19__PTD19		0x7	/* 26 */
 			MX8ULP_PAD_PTD20__PTD20		0x7	/* 33 */
 			MX8ULP_PAD_PTE0__PTE0		0x7	/* 64 */
 			MX8ULP_PAD_PTE1__PTE1		0x7	/* TUSB_IRQ */
 			MX8ULP_PAD_PTE3__PTE3		0x7	/* 19 */
 			MX8ULP_PAD_PTE6__PTE6		0x7	/* 34 */
-			MX8ULP_PAD_PTE7__PTE7		0x7     /* 32 */
 			MX8ULP_PAD_PTE8__TPM4_CH0	0x7	/* pwm4 */
-			MX8ULP_PAD_PTE9__PTE9		0x7	/* 31 */
 			MX8ULP_PAD_PTE14__PTE14		0x7	/* 41 */
 			MX8ULP_PAD_PTF15__PTF15		0x7	/* pwm4 */
 			MX8ULP_PAD_PTF18__PTF18		0x7	/* 54 */
@@ -414,7 +420,8 @@
 	leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_gpio_leds>;
+		pinctrl-0 = <&pinctrl_gpio_leds>,
+			    <&pinctrl_gpio_leds0>;
 
 		led-auxbacklight {
 			gpios = <&gpiod 18 GPIO_ACTIVE_LOW>;
@@ -431,7 +438,22 @@
 
                 led-gpsreceiver {
 			gpios = <&gpioe 10 GPIO_ACTIVE_LOW>;
-                        default-state = "on";
+			default-state = "on";
+		};
+
+		led-display-reset {
+			gpios = <&gpioe 7 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-backlight {
+			gpios = <&gpioe 9 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-backlight-driver {
+			gpios = <&gpioc 11 GPIO_ACTIVE_LOW>;
+			default-state = "on";
 		};
 	};
 };
