@@ -425,6 +425,7 @@
 	pinctrl-names = "default", "sleep";
 	pinctrl-0 = <&pinctrl_lpuart4>;
 	pinctrl-1 = <&pinctrl_lpuart4>;
+	wakeup-source;
 	status = "okay";
 };
 
@@ -432,6 +433,7 @@
 	pinctrl-names = "default", "sleep";
 	pinctrl-0 = <&pinctrl_lpuart5>;
 	pinctrl-1 = <&pinctrl_lpuart5>;
+	wakeup-source;
 	status = "okay";
 };
 
@@ -443,6 +445,7 @@
 	pinctrl-names = "default", "sleep";
 	pinctrl-0 = <&pinctrl_lpuart7>;
 	pinctrl-1 = <&pinctrl_lpuart7>;
+	wakeup-source;
 	status = "okay";
 };
 
