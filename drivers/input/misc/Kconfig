@@ -886,7 +886,6 @@ config SENSOR_FXLS8471
 
 config SENSOR_IMX_RPMSG
 	tristate "NXP IMX rpmsg virtual sensor device driver"
-	depends on (SOC_IMX7ULP)
 	depends on RPMSG && SYSFS
 	depends on OF
 	default n
