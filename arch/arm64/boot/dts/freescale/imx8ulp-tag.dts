@@ -79,7 +79,6 @@
 			MX8ULP_PAD_PTE10__PTE10	0x102	/* 55 - GPS receiver */
 			MX8ULP_PAD_PTF4__PTF4	0x03	/* btn-backlight */
 			MX8ULP_PAD_PTE9__PTE9	0x07	/* MAIN-BKLT-DIS-n */
-			MX8ULP_PAD_PTE7__PTE7	0x07	/* SOM-LCM_RSTn */
 			MX8ULP_PAD_PTD19__PTD19	0x07	/* LCD-TE0-VS */
 		>;
 	};
@@ -163,16 +162,15 @@
 		>;
 	};
 
+#define GP_LCD_RESET	<&gpioe 7 GPIO_ACTIVE_LOW>
 	pinctrl_mipi_com35h3r04uly: mipi-com35h3r04ulygrp {
 		fsl,pins = <
-#define GP_LCD_RESET	<&gpioe 7 GPIO_ACTIVE_LOW>
 			MX8ULP_PAD_PTE7__PTE7		0x02
 		>;
 	};
 
 	pinctrl_mipi_q035_014: mipi-q035-014grp {
 		fsl,pins = <
-#define GP_LCD_RESET	<&gpioe 7 GPIO_ACTIVE_LOW>
 			MX8ULP_PAD_PTE7__PTE7		0x02
 		>;
 	};
@@ -439,11 +437,6 @@
                 led-gpsreceiver {
 			gpios = <&gpioe 10 GPIO_ACTIVE_LOW>;
 			default-state = "on";
-		};
-
-		led-display-reset {
-			gpios = <&gpioe 7 GPIO_ACTIVE_LOW>;
-			default-state = "off";
 		};
 
 		led-backlight {
