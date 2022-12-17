@@ -78,6 +78,7 @@ struct imx_rpmsg_gpio_port {
 	struct irq_domain *domain;
 	struct imx_rpmsg_gpio_pin gpio_pins[IMX_RPMSG_GPIO_PER_PORT];
 	int idx;
+	int irq_base;
 };
 
 struct imx_gpio_rpmsg_info {
@@ -421,6 +422,12 @@ static struct irq_chip imx_rpmsg_irq_chip = {
 	/* TBD: Add .irq_disable support */
 };
 
+static int to_irq(struct gpio_chip *gc, unsigned int offset)
+{
+	struct imx_rpmsg_gpio_port *port = gpiochip_get_data(gc);
+	return port->irq_base + offset;
+}
+
 static int imx_rpmsg_gpio_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
@@ -459,6 +466,7 @@ static int imx_rpmsg_gpio_probe(struct platform_device *pdev)
 		return ret;
 
 	/* generate one new irq domain */
+	gc->irq.chip = &port->chip;
 	port->chip = imx_rpmsg_irq_chip;
 	port->chip.name = kasprintf(GFP_KERNEL, "rpmsg-irq-port-%d", port->idx);
 	port->chip.parent_device = NULL;
@@ -466,6 +474,7 @@ static int imx_rpmsg_gpio_probe(struct platform_device *pdev)
 	irq_base = irq_alloc_descs(-1, 0, IMX_RPMSG_GPIO_PER_PORT,
 				   numa_node_id());
 	WARN_ON(irq_base < 0);
+	port->irq_base = irq_base;
 
 	port->domain = irq_domain_add_legacy(np, IMX_RPMSG_GPIO_PER_PORT,
 					     irq_base, 0,
@@ -482,6 +491,9 @@ static int imx_rpmsg_gpio_probe(struct platform_device *pdev)
 	if (!imx_rpmsg_gpio_workqueue)
 		dev_err(&pdev->dev, "Failed to create imx_rpmsg_gpio_workqueue\n");
 	INIT_WORK(&(imx_rpmsg_gpio_send_work.rpmsg_send_wq), imx_rpmsg_gpio_do_send);
+
+	if (!gc->to_irq)
+		gc->to_irq = to_irq;
 
 	return 0;
 }
