@@ -33,6 +33,16 @@
 		>;
 	};
 
+        pinctrl_gpio_keys1: auxkeysgrp {
+		fsl,pins = <
+			MX8ULP_PAD_PTE16__PTE16 0x03    /* NAV SELECT */
+			MX8ULP_PAD_PTE17__PTE17 0x03    /* NAV UP */
+			MX8ULP_PAD_PTE18__PTE18 0x03    /* NAV RIGHT */
+			MX8ULP_PAD_PTE19__PTE19 0x03    /* NAV DOWN */
+			MX8ULP_PAD_PTE2__PTE2   0x03    /* NAV BACK */
+		>;
+        };
+
 	pinctrl_hog: hoggrp {
 		fsl,pins = <
 			MX8ULP_PAD_PTD15__PTD15		0x7	/* IMU_IRQ */
@@ -43,7 +53,6 @@
 			MX8ULP_PAD_PTD20__PTD20		0x7	/* 33 */
 			MX8ULP_PAD_PTE0__PTE0		0x7	/* 64 */
 			MX8ULP_PAD_PTE1__PTE1		0x7	/* TUSB_IRQ */
-			MX8ULP_PAD_PTE2__PTE2		0x7	/* BACK */
 			MX8ULP_PAD_PTE3__PTE3		0x7	/* 19 */
 			MX8ULP_PAD_PTE6__PTE6		0x7	/* 34 */
 			MX8ULP_PAD_PTE7__PTE7		0x7	/* 32 */
@@ -51,10 +60,6 @@
 			MX8ULP_PAD_PTE9__PTE9		0x7	/* 31 */
 			MX8ULP_PAD_PTE10__PTE10		0x7	/* 55 */
 			MX8ULP_PAD_PTE14__PTE14		0x7	/* 41 */
-			MX8ULP_PAD_PTE16__PTE16		0x7	/* Start */
-			MX8ULP_PAD_PTE17__PTE17		0x7	/* Up */
-			MX8ULP_PAD_PTE18__PTE18		0x7	/* Right */
-			MX8ULP_PAD_PTE19__PTE19		0x7	/* Down */
 			MX8ULP_PAD_PTF15__TPM4_CH3	0x7	/* pwm4 */
 			MX8ULP_PAD_PTF18__PTF18		0x7	/* 54 */
 			MX8ULP_PAD_PTF19__PTF19		0x7	/* 47 */
