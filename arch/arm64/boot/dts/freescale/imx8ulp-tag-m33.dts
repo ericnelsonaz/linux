@@ -4,9 +4,111 @@
  */
 
 #include "imx8ulp-tag.dts"
-#include "imx8ulp-rpmsg.dtsi"
 
 / {
+	aliases {
+		gpio0 = &gpioa;
+		gpio1 = &gpiob;
+		gpio2 = &gpioc;
+	};
+
+	gpioa: gpio@0 {
+		compatible = "fsl,imx-rpmsg-gpio";
+		port_idx = <0>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		#interrupt-cells = <2>;
+		interrupt-controller;
+		interrupt-parent = <&gpioa>;
+		status = "okay";
+	};
+
+	gpiob: gpio@1 {
+		compatible = "fsl,imx-rpmsg-gpio";
+		port_idx = <1>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		#interrupt-cells = <2>;
+		interrupt-controller;
+		interrupt-parent = <&gpiob>;
+		status = "okay";
+	};
+
+	gpioc: gpio@2 {
+		compatible = "fsl,imx-rpmsg-gpio";
+		port_idx = <2>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		#interrupt-cells = <2>;
+		interrupt-controller;
+		interrupt-parent = <&gpioc>;
+		status = "okay";
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_gpio_keys1>;
+
+		aux-left {
+			label = "aux left";
+			gpios = <&gpiob 7 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_BRIGHTNESS_TOGGLE>;
+		};
+
+		aux-right {
+			label = "aux right";
+			gpios = <&gpioc 0 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_SCROLLDOWN>;
+		};
+		nav-menu {
+			label = "nav menu";
+			gpios = <&gpioc 17 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_MENU>;
+		};
+
+		nav-left {
+			label = "nav left";
+			gpios = <&gpioa 16 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_LEFT>;
+		};
+
+		nav-up {
+			label = "nav up";
+			gpios = <&gpioe 17 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_UP>;
+		};
+
+		nav-right {
+			label = "nav right";
+			gpios = <&gpioe 18 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RIGHT>;
+		};
+
+		nav-down {
+			label = "nav down";
+			gpios = <&gpioe 19 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_DOWN>;
+		};
+
+		nav-select {
+			label = "nav select";
+			gpios = <&gpioe 16 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_ENTER>;
+		};
+
+		nav-back {
+			label = "nav back";
+			gpios = <&gpioe 2 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_BACK>;
+		};
+	};
+
+	imx8ulp_cm33: imx8ulp-cm33 {
+		compatible = "fsl,imx8ulp-cm33", "fsl,imx7ulp-cm4";
+		status = "disabled";
+	};
+
 	reserved-memory {
 		rsc_table: rsc_table@1fff8000{
 			reg = <0 0x1fff8000 0 0x1000>;
@@ -44,19 +146,6 @@
 			reg = <0 0xa8600000 0 0x1000000>;
 		};
 	};
-
-};
-
-&i2c_rpbus_0 {
-	#address-cells = <1>;
-	#size-cells = <0>;
-	status = "okay";
-};
-
-&i2c_rpbus_1 {
-	#address-cells = <1>;
-	#size-cells = <0>;
-	status = "okay";
 };
 
 &imx8ulp_cm33 {
