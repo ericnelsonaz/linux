@@ -109,10 +109,50 @@
 		status = "disabled";
 	};
 
+	leds {
+		compatible = "gpio-leds";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_gpio_leds>;
+
+		led-auxbacklight {
+			gpios = <&gpiod 18 GPIO_ACTIVE_LOW>;
+		};
+
+		led-auxenable {
+			gpios = <&gpioc 3 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-btnbacklight {
+			gpios = <&gpiof 4 GPIO_ACTIVE_LOW>;
+		};
+
+                led-gpsreceiver {
+			gpios = <&gpioe 10 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led-backlight {
+			gpios = <&gpioe 9 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-backlight-driver {
+			gpios = <&gpioc 11 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led-ugram-gps-pwrn {
+			gpios = <&gpioc 16 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+	};
+
 	lpspi2 {
 		compatible = "spi-gpio";
 		sck-gpios = <&gpioc 4 0>;
 		mosi-gpios = <&gpioc 2 0>;
+		miso-gpios = <&gpioc 5 0>;
 		cs-gpios = <&gpioc 1 0>;
 		num-chipselects = <1>;
 		#address-cells = <1>;

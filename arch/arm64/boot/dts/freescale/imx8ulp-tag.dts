@@ -13,6 +13,16 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
 
+	pinctrl_gpio_leds: ledgrp {
+		fsl,pins = <
+			MX8ULP_PAD_PTD18__PTD18	0x03	/* 146: aux-backlight */
+			MX8ULP_PAD_PTE10__PTE10	0x102	/* 55 - GPS receiver */
+			MX8ULP_PAD_PTF4__PTF4	0x03	/* btn-backlight */
+			MX8ULP_PAD_PTE9__PTE9	0x07	/* MAIN-BKLT-DIS-n */
+			MX8ULP_PAD_PTD19__PTD19	0x07	/* LCD-TE0-VS */
+		>;
+	};
+
 	pinctrl_fec: fecgrp {
 		fsl,pins = <
 			MX8ULP_PAD_PTF8__ENET0_MDIO	0x43
@@ -21,7 +31,6 @@
 			MX8ULP_PAD_PTF5__ENET0_RXER	0x43
 			MX8ULP_PAD_PTF1__ENET0_RXD0	0x43
 			MX8ULP_PAD_PTF0__ENET0_RXD1	0x43
-			MX8ULP_PAD_PTF4__ENET0_TXEN	0x43
 			MX8ULP_PAD_PTF3__ENET0_TXD0	0x43
 			MX8ULP_PAD_PTF2__ENET0_TXD1	0x43
 			MX8ULP_PAD_PTF7__ENET0_REFCLK	0x10043
@@ -48,8 +57,6 @@
 			MX8ULP_PAD_PTD15__PTD15		0x7	/* IMU_IRQ */
 			MX8ULP_PAD_PTD16__PTD16		0x7	/* 29 */
 			MX8ULP_PAD_PTD17__PTD17		0x7	/* 30 */
-			MX8ULP_PAD_PTD18__PTD18		0x7	/* 39 */
-			MX8ULP_PAD_PTD19__PTD19		0x7	/* 26 */
 			MX8ULP_PAD_PTD20__PTD20		0x7	/* 33 */
 			MX8ULP_PAD_PTE0__PTE0		0x7	/* 64 */
 			MX8ULP_PAD_PTE1__PTE1		0x7	/* TUSB_IRQ */
@@ -57,8 +64,6 @@
 			MX8ULP_PAD_PTE6__PTE6		0x7	/* 34 */
 			MX8ULP_PAD_PTE7__PTE7		0x7	/* 32 */
 			MX8ULP_PAD_PTE8__PTE8		0x7	/* 20 */
-			MX8ULP_PAD_PTE9__PTE9		0x7	/* 31 */
-			MX8ULP_PAD_PTE10__PTE10		0x7	/* 55 */
 			MX8ULP_PAD_PTE14__PTE14		0x7	/* 41 */
 			MX8ULP_PAD_PTF15__TPM4_CH3	0x7	/* pwm4 */
 			MX8ULP_PAD_PTF18__PTF18		0x7	/* 54 */
