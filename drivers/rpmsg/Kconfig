@@ -6,6 +6,10 @@ menu "Rpmsg drivers"
 config RPMSG
 	tristate
 
+config RPMSG_AUXDISPLAY
+	tristate "Auxiliary Display over RPMSG"
+	depends on RPMSG
+
 config RPMSG_CHAR
 	tristate "RPMSG device interface"
 	depends on RPMSG
