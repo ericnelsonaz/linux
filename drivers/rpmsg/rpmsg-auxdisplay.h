@@ -17,5 +17,15 @@
 #define AUX_YRES 68
 #define AUX_BPL (AUX_XRES/8)
 #define AUX_DISPBYTES (AUX_YRES*AUX_BPL)
+#define AUX_MAX_PAYLOAD 232
+
+struct auxdisplay_rpmsg_msg {
+	struct imx_rpmsg_head hdr;
+
+	/* Payload Start. command is in imx header */
+	uint16_t x;
+	uint16_t y;
+	u8	 data[AUX_MAX_PAYLOAD];
+} __packed __aligned(1);
 
 #endif

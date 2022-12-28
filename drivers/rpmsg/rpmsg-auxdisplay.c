@@ -23,15 +23,6 @@ struct aux_dev {
         struct rpmsg_device	*rpdev;
 };
 
-struct auxdisplay_rpmsg_msg {
-	struct imx_rpmsg_head hdr;
-
-	/* Payload Start. command is in imx header */
-	uint16_t x;
-	uint16_t y;
-	u8	 data[AUX_DISPBYTES];
-} __packed __aligned(1);
-
 static struct class *aux_class;
 static int aux_major;
 static dev_t devnum;
@@ -48,22 +39,51 @@ static int aux_open(struct inode *inode, struct file *file)
 	return 0;
 }
 
+#ifdef WANT_CKSUM
+static unsigned img_cksum;
+
+static unsigned addem(uint8_t const *data, unsigned count)
+{
+	unsigned sum = 0;
+	while (0 < count--) {
+		sum += *data++ ;
+	}
+	return sum;
+}
+#endif
+
 static ssize_t aux_write (struct file *file, const char __user *buf, size_t count, loff_t * ppos)
 {
 	struct aux_dev *dev = (struct aux_dev *)file->private_data;
 	struct auxdisplay_rpmsg_msg msg;
         struct rpmsg_device *rpdev = dev->rpdev;
+	loff_t offs = *ppos;
 	int err;
 
+#ifdef WANT_CKSUM
+	if (0 == offs)
+		img_cksum = 0;
+#endif
+
+	/* display overrun */
+	if (offs >= AUX_DISPBYTES)
+		return -ENOSPC;
+
+	/* clamp size */
+	if (offs + count > AUX_DISPBYTES)
+		count = AUX_DISPBYTES - offs;
+
 	if (count > sizeof(msg.data))
-		return -EINVAL;
+		count = sizeof(msg.data);
 
 	memset(&msg, 0, sizeof(msg));
 	msg.hdr.cate = SRTM_DISPLAY_CATEGORY;
 	msg.hdr.major = SRTM_DISPLAY_VERSION >> 8;
 	msg.hdr.minor = SRTM_DISPLAY_VERSION & 0xFF;
 	msg.hdr.type = 0;
-	msg.hdr.cmd = 0;
+	msg.hdr.cmd = AUX_UPDATE_DISPLAY;
+	msg.y = offs / AUX_BPL;
+	msg.x = (offs % AUX_BPL) * 8;
 
 	if(copy_from_user(&msg.data, buf, count)) 
 		return -EFAULT;
@@ -72,8 +92,13 @@ static ssize_t aux_write (struct file *file, const char __user *buf, size_t coun
 	if (err)
 		dev_err(&rpdev->dev, "rpmsg_send failed: %d\n", err);
 	else {
-		dev_info(&rpdev->dev, "sent %lu bytes to ep %d\n", count, rpdev->dst);
+		dev_info(&rpdev->dev, "[%d:%d] -> %lu bytes\n", msg.x, msg.y, count);
 		*ppos += count;
+#ifdef WANT_CKSUM
+		img_cksum += addem(msg.data, count);
+		if (AUX_DISPBYTES == *ppos)
+			dev_info(&rpdev->dev, "cksum 0x%x\n", img_cksum);
+#endif
 		err = count;
 	}
 
