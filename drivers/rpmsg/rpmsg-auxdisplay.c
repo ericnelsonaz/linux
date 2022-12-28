@@ -92,7 +92,7 @@ static ssize_t aux_write (struct file *file, const char __user *buf, size_t coun
 	if (err)
 		dev_err(&rpdev->dev, "rpmsg_send failed: %d\n", err);
 	else {
-		dev_info(&rpdev->dev, "[%d:%d] -> %lu bytes\n", msg.x, msg.y, count);
+		dev_dbg(&rpdev->dev, "[%d:%d] -> %lu bytes\n", msg.x, msg.y, count);
 		*ppos += count;
 #ifdef WANT_CKSUM
 		img_cksum += addem(msg.data, count);
@@ -124,7 +124,7 @@ static int rpmsg_auxdisplay_probe(struct rpmsg_device *rpdev)
 	struct aux_dev *dev; 
 	int err;
 
-	dev_info(&rpdev->dev, "new channel: 0x%x -> 0x%x!\n",
+	dev_dbg(&rpdev->dev, "new channel: 0x%x -> 0x%x!\n",
 			rpdev->src, rpdev->dst);
 
 	dev = kzalloc(sizeof(struct aux_dev), GFP_KERNEL);
@@ -168,14 +168,14 @@ static int rpmsg_auxdisplay_probe(struct rpmsg_device *rpdev)
 	}
 
 	dev->rpdev = rpdev;
-	dev_info(&rpdev->dev, "%s: created device with priv %px:%px\n", __func__, dev, rpdev);
+	dev_dbg(&rpdev->dev, "%s: created device with priv %px:%px\n", __func__, dev, rpdev);
 
 	memset(&msg, 0, sizeof(msg));
 	msg.hdr.cate = SRTM_DISPLAY_CATEGORY;
 	msg.hdr.major = SRTM_DISPLAY_VERSION >> 8;
 	msg.hdr.minor = SRTM_DISPLAY_VERSION & 0xFF;
 	msg.hdr.type = 0;
-	msg.hdr.cmd = 0;
+	msg.hdr.cmd = AUX_CLEAR_DISPLAY;
 
 	err = rpmsg_sendto(rpdev->ept, &msg, sizeof(msg) - sizeof(msg.data), rpdev->dst);
 	if (err) {
@@ -183,14 +183,14 @@ static int rpmsg_auxdisplay_probe(struct rpmsg_device *rpdev)
 		return err;
 	}
 
-	dev_info(&rpdev->dev, "%s: sent hello and msg\n", __func__);
+	dev_dbg(&rpdev->dev, "%s: sent hello and msg\n", __func__);
 
 	return 0;
 }
 
 static void rpmsg_auxdisplay_remove(struct rpmsg_device *rpdev)
 {
-	dev_info(&rpdev->dev, "rpmsg auxdisplay driver is removed\n");
+	dev_dbg(&rpdev->dev, "rpmsg auxdisplay driver is removed\n");
 }
 
 static struct rpmsg_device_id rpmsg_driver_auxdisplay_id_table[] = {
