@@ -116,6 +116,7 @@
 
 		led-auxbacklight {
 			gpios = <&gpiod 18 GPIO_ACTIVE_LOW>;
+			default-state = "on";
 		};
 
 		led-auxenable {
