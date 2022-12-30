@@ -16,29 +16,30 @@
 	pinctrl_gpio_leds: ledgrp {
 		fsl,pins = <
 			MX8ULP_PAD_PTD18__PTD18	0x03	/* 146: aux-backlight */
-			MX8ULP_PAD_PTE10__PTE10	0x102	/* 55 - GPS receiver */
+			MX8ULP_PAD_PTD19__PTD19	0x27	/* LCD-TE0-VS */
+			MX8ULP_PAD_PTE0__PTE0	0	/* PSN11_TOD-ENn */
+			MX8ULP_PAD_PTE7__PTE7	0	/* SOM-LCM_RSTn */
+			MX8ULP_PAD_PTE8__PTE8	0x7	/* MAIN-PWM */
+			MX8ULP_PAD_PTE9__PTE9	0	/* MAIN-BKLT-DIS-n */
+			MX8ULP_PAD_PTE10__PTE10	0x22	/* 55 - GPS receiver */
 			MX8ULP_PAD_PTF4__PTF4	0x03	/* btn-backlight */
-			MX8ULP_PAD_PTE9__PTE9	0x07	/* MAIN-BKLT-DIS-n */
-			MX8ULP_PAD_PTD19__PTD19	0x07	/* LCD-TE0-VS */
+			MX8ULP_PAD_PTF6__PTF6	0	/* USB-CC2_RD2 */
+			MX8ULP_PAD_PTF7__PTF7	0	/* USB-CC1_RD1 */
+			MX8ULP_PAD_PTF8__PTF8	0	/* INT_ANT_EN */
+			MX8ULP_PAD_PTF9__PTF9	0	/* EXT_ANT_EN */
+			MX8ULP_PAD_PTF13__PTF13 0x20	/* DC_KILLn */
+			MX8ULP_PAD_PTF18__PTF18	0x3	/* SOM-KEY-LOAD-EN */
+			MX8ULP_PAD_PTF19__PTF19	0x20	/* ZERO_CVn */
+			MX8ULP_PAD_PTF21__PTF21	0x20	/* CP-REPROG */
+			MX8ULP_PAD_PTF25__PTF25	0	/* RS422_EN */
+			MX8ULP_PAD_PTF28__PTF28	0x20	/* DFP-VBUS_ENn */
 		>;
 	};
 
-	pinctrl_fec: fecgrp {
+	pinctrl_i2cn: i2cngrp {
 		fsl,pins = <
-			MX8ULP_PAD_PTF8__ENET0_MDIO	0x43
-			MX8ULP_PAD_PTF9__ENET0_MDC	0x43
-			MX8ULP_PAD_PTF6__ENET0_CRS_DV	0x43
-			MX8ULP_PAD_PTF5__ENET0_RXER	0x43
-			MX8ULP_PAD_PTF1__ENET0_RXD0	0x43
 			MX8ULP_PAD_PTF0__ENET0_RXD1	0x43
 			MX8ULP_PAD_PTF3__ENET0_TXD0	0x43
-			MX8ULP_PAD_PTF2__ENET0_TXD1	0x43
-			MX8ULP_PAD_PTF7__ENET0_REFCLK	0x10043
-			MX8ULP_PAD_PTE13__ENET0_1588_CLKIN 0x10043
-			MX8ULP_PAD_PTE12__ENET0_1588_TMR0 0x10043
-			MX8ULP_PAD_PTF12__ENET0_1588_TMR1 0x10043
-			MX8ULP_PAD_PTF13__ENET0_1588_TMR2 0x10043
-			MX8ULP_PAD_PTF14__ENET0_1588_TMR3 0x10043
 		>;
 	};
 
@@ -55,26 +56,23 @@
 	pinctrl_hog: hoggrp {
 		fsl,pins = <
 			MX8ULP_PAD_PTD15__PTD15		0x7	/* IMU_IRQ */
-			MX8ULP_PAD_PTD16__PTD16		0x7	/* 29 */
-			MX8ULP_PAD_PTD17__PTD17		0x7	/* 30 */
-			MX8ULP_PAD_PTD20__PTD20		0x7	/* 33 */
-			MX8ULP_PAD_PTE0__PTE0		0x7	/* 64 */
+			MX8ULP_PAD_PTD16__PTD16		0x7	/* EXTANT_OCn */
+			MX8ULP_PAD_PTD17__PTD17		0x7	/* L1_STAT GPIO */
+			MX8ULP_PAD_PTD20__PTD20		0x7	/* SOM-SNSR_INT1 */
 			MX8ULP_PAD_PTE1__PTE1		0x7	/* TUSB_IRQ */
-			MX8ULP_PAD_PTE3__PTE3		0x7	/* 19 */
-			MX8ULP_PAD_PTE6__PTE6		0x7	/* 34 */
-			MX8ULP_PAD_PTE7__PTE7		0x7	/* 32 */
-			MX8ULP_PAD_PTE8__PTE8		0x7	/* 20 */
-			MX8ULP_PAD_PTE14__PTE14		0x7	/* 41 */
+			MX8ULP_PAD_PTE3__PTE3		0x7	/* RBS_STATn */
+			MX8ULP_PAD_PTE6__PTE6		0x7	/* PBC_PG */
+			MX8ULP_PAD_PTE12__PTE12		0	/* 4V0_INTn */
+			MX8ULP_PAD_PTE13__PTE13		0	/* 3V3_INTn */
+			MX8ULP_PAD_PTE14__PTE14		0x2	/* L2_STAT GPIO */
+			MX8ULP_PAD_PTF2__PTF2		0	/* USB-CTRL_INTn */
+			MX8ULP_PAD_PTF12__PTF12		0	/* 1V8_INTn */
+			MX8ULP_PAD_PTF17__PTF17		0	/* ADC_ALERT */
 			MX8ULP_PAD_PTF15__TPM4_CH3	0x7	/* pwm4 */
-			MX8ULP_PAD_PTF18__PTF18		0x7	/* 54 */
-			MX8ULP_PAD_PTF19__PTF19		0x7	/* 47 */
-			MX8ULP_PAD_PTF20__PTF20		0x7	/* 48 */
-			MX8ULP_PAD_PTF21__PTF21		0x7	/* 37 */
+			MX8ULP_PAD_PTF20__PTF20		0x3	/* RCVR_DET */
 			MX8ULP_PAD_PTF24__PTF24		0x7	/* 49 */
-			MX8ULP_PAD_PTF25__PTF25		0x7	/* 27 */
-			MX8ULP_PAD_PTF26__PTF26		0x7	/* 51 */
-			MX8ULP_PAD_PTF27__PTF27		0x7	/* 57 */
-			MX8ULP_PAD_PTF28__PTF28		0x7	/*  5 */
+			MX8ULP_PAD_PTF26__PTF26		0x2	/* KEY-FILL-OK */
+			MX8ULP_PAD_PTF27__PTF27		0	/* 1PPS_BDDP */
 			MX8ULP_PAD_PTF29__PTF29		0x7	/* pmic_mode0 */
 			MX8ULP_PAD_PTF30__PTF30		0x7	/* pmic_mode1 */
 			MX8ULP_PAD_PTF31__PTF31		0x7	/* pmic_mode2 */
@@ -361,24 +359,6 @@
 	memory-region = <&dsp_vdev0buffer>, <&dsp_vdev0vring0>,
 			<&dsp_vdev0vring1>, <&dsp_reserved>;
 	status = "okay";
-};
-
-&fec {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_fec>;
-	phy-mode = "rmii";
-	phy-handle = <&ethphy>;
-	status = "disabled";
-
-	mdio {
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		ethphy: ethernet-phy@1 {
-			reg = <1>;
-			micrel,led-mode = <1>;
-		};
-	};
 };
 
 &lpi2c5 {

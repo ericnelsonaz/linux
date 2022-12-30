@@ -114,27 +114,8 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio_leds>;
 
-		led-auxbacklight {
-			gpios = <&gpiod 18 GPIO_ACTIVE_LOW>;
-			default-state = "on";
-		};
-
 		led-auxenable {
 			gpios = <&gpioc 3 GPIO_ACTIVE_HIGH>;
-			default-state = "on";
-		};
-
-		led-btnbacklight {
-			gpios = <&gpiof 4 GPIO_ACTIVE_LOW>;
-		};
-
-                led-gpsreceiver {
-			gpios = <&gpioe 10 GPIO_ACTIVE_LOW>;
-			default-state = "on";
-		};
-
-		led-backlight {
-			gpios = <&gpioe 9 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
 
@@ -146,6 +127,90 @@
 		led-ugram-gps-pwrn {
 			gpios = <&gpioc 16 GPIO_ACTIVE_LOW>;
 			default-state = "on";
+		};
+
+		led-auxbacklight {
+			gpios = <&gpiod 18 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led-lcd-te0-vs {
+			gpios = <&gpiod 19 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-psn11_tod-enn {
+			gpios = <&gpioe 0 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-som-lcm-rstn {
+			gpios = <&gpioe 7 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-main-pwm {
+			gpios = <&gpioe 8 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-backlight {
+			gpios = <&gpioe 9 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+                led-gpsreceiver {
+			gpios = <&gpioe 10 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led-btnbacklight {
+			gpios = <&gpiof 4 GPIO_ACTIVE_LOW>;
+		};
+
+		led-usb-cc2_rd2 {
+			gpios = <&gpiof 6 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led-usb-cc1_rd1 {
+			gpios = <&gpiof 7 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led-int_ant_en {
+			gpios = <&gpiof 8 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-ext_ant_en {
+			gpios = <&gpiof 9 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-dc_killn {
+			gpios = <&gpiof 13 GPIO_ACTIVE_LOW>;
+		};
+
+		led-som-key-load-en {
+			gpios = <&gpiof 18 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
+
+		led-zero_cvn {
+			gpios = <&gpiof 19 GPIO_ACTIVE_LOW>;
+		};
+
+		led-cp-reprog {
+			gpios = <&gpiof 21 GPIO_ACTIVE_LOW>;
+		};
+
+		led-rs422_en {
+			gpios = <&gpiof 25 GPIO_ACTIVE_HIGH>;
+		};
+
+		led-dfp-vbus_enn {
+			gpios = <&gpiof 28 GPIO_ACTIVE_LOW>;
 		};
 	};
 
