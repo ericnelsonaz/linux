@@ -36,13 +36,6 @@
 		>;
 	};
 
-	pinctrl_i2cn: i2cngrp {
-		fsl,pins = <
-			MX8ULP_PAD_PTF0__ENET0_RXD1	0x43
-			MX8ULP_PAD_PTF3__ENET0_TXD0	0x43
-		>;
-	};
-
         pinctrl_gpio_keys1: auxkeysgrp {
 		fsl,pins = <
 			MX8ULP_PAD_PTE16__PTE16 0x03    /* NAV SELECT */
@@ -83,6 +76,13 @@
 		fsl,pins = <
 			MX8ULP_PAD_PTE4__LPI2C5_SCL	0x27
 			MX8ULP_PAD_PTE5__LPI2C5_SDA	0x27
+		>;
+	};
+
+	pinctrl_i2c6: i2c6grp {
+		fsl,pins = <
+			MX8ULP_PAD_PTF0__LPI2C6_SCL	0x23
+			MX8ULP_PAD_PTF1__LPI2C6_SDA	0x23
 		>;
 	};
 
